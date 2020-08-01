@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://twcai.net/menu.css" />
+    <script src="http://twcai.net/MyData.js"></script>
+
+   
+    <script type="text/javascript">
+        $(document).ready(function () {
+            self.moveTo(0, 0);
+            self.resizeTo(screen.availWidth, screen.availHeight);
+
+
+            ReadXmlFromRoot("itemBox2");
+
+        });
+        //--------------------------------------------------
+        function ReadXmlFromRoot(mDiv) {
+            var mTime = new Date().getTime();
+            $.ajax({
+                type: "get",
+                url: "http://twcai.net/000FileWork/001Root_Xml.php",
+                data: { mm:mTime },
+                success: function (result) {
+                    //	alert(result);
+                    //     Add_MenuItem(result, "itemBox2");
+                    XmlToTable(result, mDiv, 3);
+                }
+            });
+        }
+		//-------------------------------------------
+function XmlToTable(xmlDoc, mDiv, colsPerRow) {
+    var xml = $.parseXML(xmlDoc);
+    var items = xml.getElementsByTagName('item');
+    var itemsLength = items.length;
+    var maxRow = Math.ceil(itemsLength / colsPerRow);
+    var tbl = document.createElement("table");
+    tbl.setAttribute("id", "table2");
+    tbl.style.border = "0px";
+    tbl.style.width = "100%";
+    tbl.style.margin = "5px auto";
+    var tblBody = document.createElement("tbody");
+    var item_index = 0;
+    for (var j = 0; j < maxRow; j++) {
+        var this_row = document.createElement("tr");
+        //   this_row.setAttribute('id', 'R' + j);
+        this_row.style.width = "100%";
+        var offset = j * colsPerRow;
+        for (var i = 0; i < colsPerRow; i++) {
+            item_index = offset + i;
+            if (item_index >= itemsLength)
+                break;
+            var mText = items[item_index].getAttribute('text');
+            var mValue = items[item_index].getAttribute('value');
+            var cell = document.createElement("td");
+            //   cell.style.background = "#9CF";
+            //           cell.style.color = "white";
+            //    cell.style.backgroundColor = "#9CF";
+            cell.style.border = "0px";
+            cell.style.padding = "2px";
+            cell.style.width = "200px";
+            var hre = document.createElement("a");
+            //	    hre.style.color = "white";
+            var TextNode = document.createTextNode(mText);
+            hre.appendChild(TextNode);
+            hre.setAttribute("value", items[item_index].getAttribute('value'));
+            hre.href = "javascript:void(0)";
+            hre.onclick = function () {
+                //    showDialog(this.getAttribute('value'));
+                menuTodoN(this.getAttribute('value'));
+                return false;
+            };
+            var li = document.createElement("li");
+            li.setAttribute("class", "facebook");
+            li.style.listStyleType = "none";
+            li.style.height = "22px";
+            li.appendChild(hre);
+            cell.appendChild(li);
+            this_row.appendChild(cell);
+        }
+        tblBody.appendChild(this_row);
+    }
+    tbl.appendChild(tblBody);
+    var TagetDiv = document.getElementById(mDiv);
+	TagetDiv.innerHTML="";
+    TagetDiv.appendChild(tbl);
+}
+       
+
+
+        //-----------------------------------------
+
+        function menuTodoN(fname) {
+           // 	alert(fname);
+          
+
+
+            var mPath = fname.replace("G:/PleskVhosts/twcai.net/httpdocs", "http://twcai.net");
+
+            var ext = mPath.split('.').pop();
+            //	alert(ext);
+            if (ext == "html") {
+                //  	window.open(mmfname, 'iframe5');
+                //	alert(mPath);
+                window.open(mPath, '_blank');
+
+            }
+            if (ext == "php") {
+
+                window.open(mPath, '_blank');
+            }
+            if (ext == "aspx") {
+                window.open(mPath, '_blank');
+            }
+           
+        }
+       
+    </script>
+  
+</head>
+<body style="font: 新細明體, 新細明體; background-color:azure;">
+    <nav class="navbar fixed-top navbar-expand-sm " style="background-color:azure; color:red;">
+        <a class="navbar-brand" href="#" style="background-color:aliceblue; color:blue;font-size:18pt;">&nbsp;</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> MySite </a>
+                    <div id="itemBox1" class="dropdown-menu" aria-labelledby="navbarDropdown1" style="padding:20px;background-color:aliceblue;"> <a class="dropdown-item" style="background-color:aliceblue; color:blue; font-size:14pt;" href="https://kang3245.github.io/index.html" target="_blank">github</a> <a class="dropdown-item" style="background-color:aliceblue;color:blue; font-size:14pt;" href="http://kang3245.eu-4.evennode.com/" target="_blank">node3245_even</a> <a class="dropdown-item" style="background-color:aliceblue; color:blue; font-size:14pt;" href="http://kangchat.eu-4.evennode.com/" target="_blank">kangchat_even</a> <a class="dropdown-item" style="background-color:aliceblue; color:blue; font-size:14pt;" href="http://twcai.net/index.html" target="_blank">twcai</a><a class="dropdown-item" style="background-color:aliceblue; color:blue; font-size:14pt;" href="http://twcai.net/00Vedio.html" target="_blank">00Vedio</a> </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> MyRoot </a>
+                    <div id="itemBox2" class="dropdown-menu" aria-labelledby="navbarDropdown2" style="padding:20px;background-color:aliceblue;"> <a class="dropdown-item" style="background-color:aliceblue; color:red;font-size:12pt;" href="http://twcai.net/0000.html" target="_blank">initial</a>  </div>
+                </li>
+
+
+
+            </ul>
+        </div>
+    </nav>
+  
+</body>
+</html>
