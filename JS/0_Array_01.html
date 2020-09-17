@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>0_Array_01</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost/menu.css" />
+    <link href="http://localhost/css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css" />
+
+    <script src="http://localhost/jquery-3.2.1.min.js"></script>
+    <script src="http://localhost/K15.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://localhost/K15.css" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            self.moveTo(0, 0);
+            self.resizeTo(screen.availWidth, screen.availHeight);
+
+        });
+
+    </script>
+    <style type="text/css">
+        .MMTitle {
+            border: 0px solid green;
+            padding: 10px;
+            color: red;
+            font-size: 32pt;
+            border-bottom: 1px solid magenta;
+        }
+
+        .MMText {
+            border: 0px solid green;
+            padding: 30px;
+            color: blue;
+            font-size: 20pt;
+            width: 1000px;
+            height: 1000px;
+            background-color: azure;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        h2 {
+            font-size: 22pt;
+            color: red;
+        }
+    </style>
+</head>
+<body style="background-color:azure;">
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-md-12" style="text-align:left; vertical-align:top;">
+                <p class="MMTitle">Basic 0_Array_01</p>
+                <textarea class="MMText">
+
+
+var myArray = new Array();
+myArray[0] = 100;
+myArray[1] = "Adam";
+myArray[2] = true;
+
+
+var myArray = [100, "Adam", true];
+
+var myArray = [100, "Adam", true];
+document.write("Index 0: " + myArray[0]);
+
+var myArray = [100, "Adam", true];
+for (var i = 0; i < myArray.length; i++) {
+    document.write("Index " + i + ": " + myArray[i]);
+
+}
+
+try {
+    var myArray;
+    for (var i = 0; i < myArray.length; i++) {
+        document.write("Index " + i + ": " + myArray[i]);
+
+    }
+} catch (e) {
+    document.write("Error: " + e);
+}
+
+try {
+    var myArray;
+    for (var i = 0; i < myArray.length; i++) {
+        document.write("Index " + i + ": " + myArray[i]);
+    }
+} catch (e) {
+    document.write("Error: " + e);
+} finally {
+    document.write("Statements here are always executed");
+}
+                     
+                  </textarea>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
